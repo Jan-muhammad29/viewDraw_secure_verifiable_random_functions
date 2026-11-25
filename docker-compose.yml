@@ -1,0 +1,15 @@
+# Optional local SQL Server container for machines with >=4 GB free memory.
+# Prefer your existing Windows SQL Server + SSMS installation on a low-RAM laptop.
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: 'Developer'
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in a local .env before running compose}
+    ports:
+      - '127.0.0.1:1433:1433'
+    volumes:
+      - veridraw_sqlserver:/var/opt/mssql
+volumes:
+  veridraw_sqlserver:

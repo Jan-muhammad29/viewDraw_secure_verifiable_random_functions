@@ -1,0 +1,35 @@
+# Requires an externally reachable Microsoft SQL Server or Azure SQL database.
+# Do not set SQL_SERVER to localhost or disable certificate verification in production.
+services:
+  - type: web
+    name: veridraw-sqlserver
+    runtime: node
+    plan: free
+    buildCommand: npm install --no-audit --no-fund && npm run build
+    startCommand: npm run db:migrate && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: '22'
+      - key: NODE_ENV
+        value: production
+      - key: ENABLE_DEMO
+        value: 'false'
+      - key: SQL_SERVER
+        sync: false
+      - key: SQL_PORT
+        value: '1433'
+      - key: SQL_DATABASE
+        sync: false
+      - key: SQL_USER
+        sync: false
+      - key: SQL_PASSWORD
+        sync: false
+      - key: SQL_ENCRYPT
+        value: 'true'
+      - key: SQL_TRUST_SERVER_CERTIFICATE
+        value: 'false'
+      - key: VRF_PRIVATE_KEY_HEX
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false

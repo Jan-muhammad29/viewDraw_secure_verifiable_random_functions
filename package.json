@@ -1,0 +1,24 @@
+{
+  "name": "veridraw", "version": "0.5.0", "private": true, "type": "module",
+  "workspaces": ["shared", "backend", "frontend", "verifier-cli"],
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "dev:backend": "npm run dev --workspace @veridraw/backend",
+    "dev:frontend": "npm run dev --workspace @veridraw/frontend",
+    "db:create": "npm run db:create --workspace @veridraw/backend",
+    "db:wait": "npm run db:wait --workspace @veridraw/backend",
+    "db:migrate": "npm run db:migrate --workspace @veridraw/backend",
+    "db:admin": "npm run db:admin --workspace @veridraw/backend",
+    "keys:generate": "npm run keys:generate --workspace @veridraw/backend",
+    "start": "npm run start --workspace @veridraw/backend",
+    "test:protocol": "node --test shared/tests/*.test.mjs",
+    "test:sqlserver": "node --test scripts/sqlserver-contract.test.mjs",
+    "test:crypto": "node --test backend/tests/*.test.mjs",
+    "test": "npm run test:protocol && npm run test:sqlserver && npm run test:crypto",
+    "typecheck": "npm run typecheck --workspace @veridraw/backend && npm run typecheck --workspace @veridraw/frontend",
+    "build": "npm run build --workspace @veridraw/backend && npm run build --workspace @veridraw/frontend",
+    "verify": "node verifier-cli/verify.mjs",
+    "security:bench": "node scripts/benchmark.mjs",
+    "test:smoke": "node scripts/smoke.mjs"
+  }
+}
